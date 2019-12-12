@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml;
 //https://www.boardgamegeek.com/xmlapi2/search?query=die
-namespace BoardGameGeekApi
+namespace bggApi
 {
     class Program
     {

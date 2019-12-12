@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BoardGameGeekApi.ThingTypes
+namespace bggApi.ThingTypes
 {
     public class Videogame : Thing
     {
