@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
 
 namespace bggApi.ThingTypes
 {
@@ -22,5 +23,11 @@ namespace bggApi.ThingTypes
         public int Minage { get; set; }
 
         public List<Poll> Polls { get; set; }
+
+        public Boardgame(XmlNode node)
+            :base(node)
+        {
+
+        }
     }
 }

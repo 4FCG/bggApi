@@ -9,9 +9,11 @@ namespace bggApi
     {
         static async Task Main(string[] args)
         {
-            ThingOld test = await ThingOld.CreateThing(1);
-            Console.WriteLine(test.Name);
-            Console.WriteLine(test.Yearpublished);
+            BggApi testApi = new BggApi();
+
+            Thing test = testApi.GetThing(1)[0];
+            Console.WriteLine(test.Type);
+            Console.WriteLine(test.Description);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
+using System.Xml;
 
 namespace bggApi
 {
@@ -18,9 +19,22 @@ namespace bggApi
             };
         }
 
-        //public List<Item> GetThing(int id)
-        //{
-            
-        //}
+        public List<Thing> GetThing(int id)
+        {
+            string resultString = client.DownloadString(apiBaseAddress + "thing?id=" + id);
+            XmlDocument xmlData = new XmlDocument();
+            xmlData.LoadXml(resultString);
+            XmlNode itemsRoot = xmlData.SelectSingleNode("items");
+
+            List<Thing> result = new List<Thing>();
+
+            foreach (XmlNode node in itemsRoot.SelectNodes("item"))
+            {
+                Thing thing = new Thing(node);
+                result.Add(thing);
+            }
+
+            return result;
+        }
     }
 }
