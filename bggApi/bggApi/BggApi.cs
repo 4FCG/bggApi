@@ -19,9 +19,9 @@ namespace bggApi
             };
         }
 
-        public List<Thing> GetThing(int id)
+        public List<Thing> GetThing(int id, bool versions = false)
         {
-            string resultString = client.DownloadString(apiBaseAddress + "thing?id=" + id);
+            string resultString = client.DownloadString(apiBaseAddress + "thing?id=" + id + (versions ? "&versions=1" : ""));
             XmlDocument xmlData = new XmlDocument();
             xmlData.LoadXml(resultString);
             XmlNode itemsRoot = xmlData.SelectSingleNode("items");
@@ -33,7 +33,6 @@ namespace bggApi
                 Thing thing = new Thing(node);
                 result.Add(thing);
             }
-
             return result;
         }
     }

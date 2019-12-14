@@ -6,6 +6,21 @@ namespace bggApi
 {
     public partial class Thing
     {
+        //Base properties
+        public int Id { get; private set; }
+
+        public string Type { get; private set; }
+
+        public string Thumbnail { get; private set; }
+
+        public string Image { get; private set; }
+
+        public List<Name> Names { get; private set; }
+
+        public string Description { get; private set; }
+
+        public List<Link> Links { get; private set; }
+
         //Boardgame properties
         public int? Yearpublished { get; private set; }
 
