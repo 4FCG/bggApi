@@ -1,45 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.ComponentModel;
 
-namespace BoardGameGeekApi
-{  
-
-    partial class ThingOld
+namespace bggApi
+{
+    public partial class Thing
     {
-        public readonly int Id;
+        //Boardgame properties
+        public int? Yearpublished { get; private set; }
 
-        public string Type { get; private set; }
+        public int? Minplayers { get; private set; }
 
-        public string Thumbnail { get; private set; }
+        public int? Maxplayers { get; private set; }
 
-        public string Image { get; private set; }
+        public int? Playingtime { get; private set; }
 
-        /// <summary>
-        /// The primary name of the thing
-        /// </summary>
-        public string Name { get; private set; }
-        //Add support for alternative names.
+        public int? Minplaytime { get; private set; }
 
-        public string Description { get; private set; }
+        public int? Maxplaytime { get; private set; }
 
-        public int Yearpublished { get; private set; }
+        public int? Minage { get; private set; }
 
-        public int Minplayers { get; private set; }
+        public List<Poll> Polls { get; private set; }
 
-        public int Maxplayers { get; private set; }
+        //Rpgissue properties
+        public string Datepublished { get; private set; }
 
-        public int Playingtime { get; private set; }
+        public int? Issueindex { get; private set; }
 
-        public int Minplaytime { get; private set; }
+        //Rpgitem properties
+        public int? Seriescode { get; private set; }
 
-        public int Maxplaytime { get; private set; }
-
-        public int Minage { get; private set; }
-
-        //polls
-
-        //Links to other database types with relevance like publisher and categories
+        //Videogame properties
+        public string Releasedate { get; private set; }
     }
 }

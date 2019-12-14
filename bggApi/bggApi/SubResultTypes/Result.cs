@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
 
 namespace bggApi
 {
@@ -11,5 +12,10 @@ namespace bggApi
         public int Numvotes { get; set; }
 
         public string Level { get; set; }
+
+        public Result(XmlNode node)
+        {
+
+        }
     }
 }

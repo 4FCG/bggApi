@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace bggApi
 {
-    public class Thing
+    public partial class Thing
     {
         public int Id { get; private set; }
 
@@ -47,6 +47,34 @@ namespace bggApi
             {
                 Links = new List<Link>();
             }
+
+            //Boardgame properties
+            Yearpublished = Convert.ToInt32(node["yearpublished"].GetAttribute("value"));
+            Minplayers = Convert.ToInt32(node["minplayers"].GetAttribute("value"));
+            Maxplayers = Convert.ToInt32(node["maxplayers"].GetAttribute("value"));
+            Playingtime = Convert.ToInt32(node["playingtime"].GetAttribute("value"));
+            Maxplaytime = Convert.ToInt32(node["maxplaytime"].GetAttribute("value"));
+            Minplaytime = Convert.ToInt32(node["minplaytime"].GetAttribute("value"));
+            Minage = Convert.ToInt32(node["minage"].GetAttribute("value"));
+            try
+            {
+                Polls = node.SelectNodes("poll").Cast<XmlNode>().Select(node => new Poll(node)).ToList();
+            }
+            catch (ArgumentNullException)
+            {
+                Polls = new List<Poll>();
+            }
+
+            //Rpgissue properties
+            Datepublished = node["datepublished"].GetAttribute("value").ToString();
+            Issueindex = Convert.ToInt32(node["issueindex"].GetAttribute("value"));
+
+            //Rpgitem properties
+            //TODO: Is seriescode a string or an int?
+            Seriescode = Convert.ToInt32(node["seriescode"].GetAttribute("value"));
+
+            //Videogame properties
+            Releasedate = node["releasedate"].GetAttribute("value").ToString();
         }
     }
 }
