@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml;
 
 //https://www.boardgamegeek.com/xmlapi2/search?query=die
@@ -9,12 +10,13 @@ namespace bggApi
         static void Main(string[] args)
         {
             BggApi testApi = new BggApi();
-
-            Thing test = testApi.GetThing(1, versions:true)[0];
-            Console.WriteLine(test.Type);
-            Console.WriteLine(test.Versions.Count);
-
+            List<int> ids = new List<int> { 1, 200, 50 };
+            List<Thing> test = testApi.GetThing(ids, versions:true);
             
+            foreach (Thing thing in test)
+            {
+                Console.WriteLine(thing.Names.Find(name => name.Type == "primary").Value);
+            }
         }
     }
 }

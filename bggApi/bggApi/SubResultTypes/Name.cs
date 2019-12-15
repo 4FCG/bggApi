@@ -15,7 +15,9 @@ namespace bggApi
 
         public Name(XmlNode node)
         {
-
+            Type = node.Attributes["type"].Value.ToString();
+            Value = node.Attributes["value"].Value.ToString();
+            Sortindex = Convert.ToInt32(node.Attributes["sortindex"].Value);
         }
     }
 }

@@ -9,7 +9,11 @@ namespace bggApi
 {
     public partial class Thing
     {
-        public List<VersionItem> Versions { get; set; }
+        public List<VersionItem> Versions { get; } = new List<VersionItem>();
+
+        public List<Video> Videos { get; } = new List<Video>();
+
+        public Statistics Statistics { get; set; }
 
         public Thing(XmlNode node)
         {
@@ -74,11 +78,25 @@ namespace bggApi
             //Version information, optional
             if (node["versions"] != null)
             {
-                Versions = new List<VersionItem>();
                 foreach (XmlNode version in node["versions"].SelectNodes("item"))
                 {
                     Versions.Add(new VersionItem(version));
                 }
+            }
+
+            //Videos, optional
+            if (node["videos"] != null)
+            {
+                foreach (XmlNode video in node["videos"].SelectNodes("video"))
+                {
+                    Videos.Add(new Video(video));
+                }
+            }
+
+            //Statistcs, optional
+            if (node["statistics/ratings"] != null)
+            {
+                Statistics = new Statistics(node["statistics/ratings"]);
             }
         }
     }
