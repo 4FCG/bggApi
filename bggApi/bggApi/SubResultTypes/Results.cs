@@ -13,7 +13,7 @@ namespace bggApi
 
         public Results(XmlNode node)
         {
-
+            //TODO implement
         }
     }
 }

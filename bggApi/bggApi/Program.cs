@@ -1,4 +1,5 @@
-﻿using System;
+﻿using bggApi.SubResultTypes;
+using System;
 using System.Collections.Generic;
 using System.Xml;
 
@@ -16,6 +17,13 @@ namespace bggApi
             foreach (Thing thing in test)
             {
                 Console.WriteLine(thing.Names.Find(name => name.Type == "primary").Value);
+            }
+
+            List<SearchResult> searchTest = testApi.Search("fortnite");
+
+            foreach (SearchResult result in searchTest)
+            {
+                Console.WriteLine(result.Name.Value);
             }
         }
     }

@@ -9,7 +9,7 @@ namespace bggApi
     {
         public string Type { get; set; }
 
-        public int Sortindex { get; set; }
+        public int? Sortindex { get; set; }
 
         public string Value { get; set; }
 
@@ -17,7 +17,10 @@ namespace bggApi
         {
             Type = node.Attributes["type"].Value.ToString();
             Value = node.Attributes["value"].Value.ToString();
-            Sortindex = Convert.ToInt32(node.Attributes["sortindex"].Value);
+            if (node.Attributes["sortindex"] != null)
+            {
+                Sortindex = Convert.ToInt32(node.Attributes["sortindex"].Value);
+            }
         }
     }
 }

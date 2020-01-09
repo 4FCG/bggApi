@@ -1,4 +1,5 @@
-﻿using System;
+﻿using bggApi.SubResultTypes;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
@@ -29,6 +30,27 @@ namespace bggApi
         {
             string requestString = apiBaseAddress + "thing?id=" + String.Join(',', id) + (versions ? "&versions=1" : "");
             return ParseThing(requestString);
+        }
+        //TODO : Type for search
+        public List<SearchResult> Search(string query, bool exact = false)
+        {
+            string requestString = apiBaseAddress + "search?query=" + query.Replace(' ', '+') + (exact ? "&exact=1" : "");
+
+            string resultString = client.DownloadString(requestString);
+
+            XmlDocument xmlData = new XmlDocument();
+            xmlData.LoadXml(resultString);
+            XmlNode itemsRoot = xmlData.SelectSingleNode("items");
+
+            List<SearchResult> searchResults = new List<SearchResult>();
+
+            foreach (XmlNode node in itemsRoot.SelectNodes("item"))
+            {
+                SearchResult searchResult = new SearchResult(node);
+                searchResults.Add(searchResult);
+            }
+
+            return searchResults;
         }
 
         private List<Thing> ParseThing(string requestString)
