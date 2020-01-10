@@ -11,7 +11,7 @@ namespace bggApi
     {
         private readonly WebClient client;
         private readonly string apiBaseAddress = "https://www.boardgamegeek.com/xmlapi2/";
-
+        
         public BggApi()
         {
             this.client = new WebClient
@@ -36,10 +36,10 @@ namespace bggApi
             string requestString = apiBaseAddress + "thing?id=" + String.Join(',', id) + (versions ? "&versions=1" : "");
             return GetThing(requestString);
         }
-        //TODO : Type for search
-        public List<SearchResult> Search(string query, bool exact = false)
+        //TODO : Type for search is not yet functional
+        public List<SearchResult> Search(string query, Type type = Type.none, bool exact = false)
         {
-            string requestString = apiBaseAddress + "search?query=" + query.Replace(' ', '+') + (exact ? "&exact=1" : "");
+            string requestString = apiBaseAddress + "search?query=" + query.Replace(' ', '+') + (type == Type.none ? "" : nameof(type)) + (exact ? "&exact=1" : "");
             return GetSearchresults(requestString);
         }
         //TODO : Overload for multiple types
