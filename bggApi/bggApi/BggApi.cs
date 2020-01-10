@@ -19,32 +19,36 @@ namespace bggApi
                 BaseAddress = this.apiBaseAddress
             };
         }
-
+        /// <summary>
+        /// Gets a 'Thing' from the BGG database.
+        /// </summary>
+        /// <param name="id">The ID of the thing to get.</param>
+        /// <param name="versions">Set to true to load versions data.</param>
+        /// <returns>Returns a list of Things from the api request.</returns>
         public List<Thing> GetThing(int id, bool versions = false)
         {
             string requestString = apiBaseAddress + "thing?id=" + id + (versions ? "&versions=1" : "");
-            return ParseThing(requestString);
+            return GetThing(requestString);
         }
         //Overload function GetThing, to take multiple id's in a list
         public List<Thing> GetThing(List<int> id, bool versions = false)
         {
             string requestString = apiBaseAddress + "thing?id=" + String.Join(',', id) + (versions ? "&versions=1" : "");
-            return ParseThing(requestString);
+            return GetThing(requestString);
         }
         //TODO : Type for search
         public List<SearchResult> Search(string query, bool exact = false)
         {
             string requestString = apiBaseAddress + "search?query=" + query.Replace(' ', '+') + (exact ? "&exact=1" : "");
+            return GetSearchresults(requestString);
+        }
+        //TODO : Overload for multiple types
 
-            string resultString = client.DownloadString(requestString);
-
-            XmlDocument xmlData = new XmlDocument();
-            xmlData.LoadXml(resultString);
-            XmlNode itemsRoot = xmlData.SelectSingleNode("items");
-
+        private List<SearchResult> GetSearchresults(string requestString)
+        {
             List<SearchResult> searchResults = new List<SearchResult>();
 
-            foreach (XmlNode node in itemsRoot.SelectNodes("item"))
+            foreach (XmlNode node in GetItems(requestString))
             {
                 SearchResult searchResult = new SearchResult(node);
                 searchResults.Add(searchResult);
@@ -53,21 +57,26 @@ namespace bggApi
             return searchResults;
         }
 
-        private List<Thing> ParseThing(string requestString)
+        private List<Thing> GetThing(string requestString)
+        {
+            List<Thing> result = new List<Thing>();
+
+            foreach (XmlNode node in GetItems(requestString))
+            {
+                Thing thing = new Thing(node);
+                result.Add(thing);
+            }
+            return result;
+        }
+
+        private XmlNodeList GetItems(string requestString)
         {
             string resultString = client.DownloadString(requestString);
             XmlDocument xmlData = new XmlDocument();
             xmlData.LoadXml(resultString);
             XmlNode itemsRoot = xmlData.SelectSingleNode("items");
 
-            List<Thing> result = new List<Thing>();
-
-            foreach (XmlNode node in itemsRoot.SelectNodes("item"))
-            {
-                Thing thing = new Thing(node);
-                result.Add(thing);
-            }
-            return result;
+            return itemsRoot.SelectNodes("item");
         }
     }
 }
