@@ -19,12 +19,15 @@ namespace bggApi
                 Console.WriteLine(thing.Names.Find(name => name.Type == "primary").Value);
             }
 
-            List<SearchResult> searchTest = testApi.Search("fortnite");
+            List<Type> types = new List<Type> { Type.boardgame, Type.videogame };
+
+            List<SearchResult> searchTest = testApi.Search("fortnite", type: types);
 
             foreach (SearchResult result in searchTest)
             {
                 Console.WriteLine(result.Name.Value);
             }
+
         }
     }
 }

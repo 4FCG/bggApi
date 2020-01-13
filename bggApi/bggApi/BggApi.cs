@@ -36,13 +36,31 @@ namespace bggApi
             string requestString = apiBaseAddress + "thing?id=" + String.Join(',', id) + (versions ? "&versions=1" : "");
             return GetThing(requestString);
         }
-        //TODO : Type for search is not yet functional
         public List<SearchResult> Search(string query, Type type = Type.none, bool exact = false)
         {
-            string requestString = apiBaseAddress + "search?query=" + query.Replace(' ', '+') + (type == Type.none ? "" : nameof(type)) + (exact ? "&exact=1" : "");
+            string requestString = apiBaseAddress + "search?query=" + query.Replace(' ', '+') + (type == Type.none ? "" : "&type=" + type.ToString()) + (exact ? "&exact=1" : "");
             return GetSearchresults(requestString);
         }
         //TODO : Overload for multiple types
+        public List<SearchResult> Search(string query, IEnumerable<Type> type = null, bool exact = false)
+        {
+            string searchTypes;
+            if (type == null)
+            {
+                searchTypes = "";
+            }
+            else
+            {
+                searchTypes = "&type=";
+                foreach (Type single in type)
+                {
+                    searchTypes += single.ToString() + ",";
+                }
+            }
+
+            string requestString = apiBaseAddress + "search?query=" + query.Replace(' ', '+') + searchTypes + (exact ? "&exact=1" : "");
+            return GetSearchresults(requestString);
+        }
 
         private List<SearchResult> GetSearchresults(string requestString)
         {
