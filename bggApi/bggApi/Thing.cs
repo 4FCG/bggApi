@@ -15,6 +15,9 @@ namespace bggApi
 
         public Statistics Statistics { get; set; }
 
+        //TODO Add page support
+        public List<Comment> Comments { get; } = new List<Comment>();
+
         public Thing(XmlNode node)
         {
             //Primary properties
@@ -93,10 +96,19 @@ namespace bggApi
                 }
             }
 
-            //Statistcs, optional
+            //Statistics, optional
             if (node["statistics/ratings"] != null)
             {
                 Statistics = new Statistics(node["statistics/ratings"]);
+            }
+
+            //Comments, optional
+            if (node["comments"] != null)
+            {
+                foreach (XmlNode comment in node["comments"].SelectNodes("comment"))
+                {
+                    Comments.Add(new Comment(comment));
+                }
             }
         }
     }

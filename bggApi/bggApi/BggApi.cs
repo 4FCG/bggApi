@@ -25,34 +25,22 @@ namespace bggApi
         /// <param name="id">The ID of the thing to get.</param>
         /// <param name="versions">Set to true to load versions data.</param>
         /// <returns>Returns a list of Things from the api request.</returns>
-        public List<Thing> GetThing(int id, bool versions = false, bool videos = false)
+        public List<Thing> GetThing(int id, bool versions = false, bool videos = false, bool comments = false)
         {
-            string requestString = apiBaseAddress + "thing?id=" + id + (versions ? "&versions=1" : "");
+            string requestString = apiBaseAddress + "thing?id=" + id + (versions ? "&versions=1" : "") + (videos ? "&videos=1" : "") + (comments ? "&comments=1" : "");
             return GetThing(requestString);
         }
+        // TODO optimize optional parameters
         //Overload function GetThing, to take multiple id's in a list
-        public List<Thing> GetThing(List<int> id, bool versions = false)
+        public List<Thing> GetThing(List<int> id, bool versions = false, bool videos = false, bool comments = false)
         {
-            string requestString = apiBaseAddress + "thing?id=" + String.Join(',', id) + (versions ? "&versions=1" : "");
+            string requestString = apiBaseAddress + "thing?id=" + String.Join(',', id) + (versions ? "&versions=1" : "") + (videos ? "&videos=1" : "") + (comments ? "&comments=1" : "");
             return GetThing(requestString);
         }
         public List<SearchResult> Search(string query, Type type = Type.none, bool exact = false)
         {
             string requestString = apiBaseAddress + "search?query=" + query.Replace(' ', '+') + (type == Type.none ? "" : "&type=" + type.ToString()) + (exact ? "&exact=1" : "");
             return GetSearchresults(requestString);
-        }
-
-        private string GetOptionalString(params bool[] bools)
-        {
-            string result = "";
-            foreach (bool optional in bools)
-            {
-                if (optional)
-                {
-
-                }
-            }
-            return result;
         }
 
         //Overload function for multiple types

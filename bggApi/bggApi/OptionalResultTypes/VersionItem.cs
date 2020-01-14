@@ -9,6 +9,9 @@ namespace bggApi.OptionalResultTypes
     {
         //TODO : add properties, do different thing types have different properties for their versions?
 
+        //https://boardgamegeek.com/xmlapi2/thing?id=135781&versions=1
+        //https://boardgamegeek.com/xmlapi2/thing?id=292569&versions=1
+
         public VersionItem(XmlNode node)
         {
 

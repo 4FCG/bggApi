@@ -26,6 +26,12 @@ namespace bggApi
             foreach (SearchResult result in searchTest)
             {
                 Console.WriteLine(result.Name.Value);
+                Thing thing = testApi.GetThing(result.Id, comments:true)[0];
+                foreach (bggApi.OptionalResultTypes.Comment comment in thing.Comments)
+                {
+                    Console.WriteLine(comment.Username);
+                    Console.WriteLine(comment.Value);
+                }
             }
 
         }
