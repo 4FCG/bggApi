@@ -25,7 +25,7 @@ namespace bggApi
         /// <param name="id">The ID of the thing to get.</param>
         /// <param name="versions">Set to true to load versions data.</param>
         /// <returns>Returns a list of Things from the api request.</returns>
-        public List<Thing> GetThing(int id, bool versions = false)
+        public List<Thing> GetThing(int id, bool versions = false, bool videos = false)
         {
             string requestString = apiBaseAddress + "thing?id=" + id + (versions ? "&versions=1" : "");
             return GetThing(requestString);
@@ -41,7 +41,21 @@ namespace bggApi
             string requestString = apiBaseAddress + "search?query=" + query.Replace(' ', '+') + (type == Type.none ? "" : "&type=" + type.ToString()) + (exact ? "&exact=1" : "");
             return GetSearchresults(requestString);
         }
-        //TODO : Overload for multiple types
+
+        private string GetOptionalString(params bool[] bools)
+        {
+            string result = "";
+            foreach (bool optional in bools)
+            {
+                if (optional)
+                {
+
+                }
+            }
+            return result;
+        }
+
+        //Overload function for multiple types
         public List<SearchResult> Search(string query, IEnumerable<Type> type = null, bool exact = false)
         {
             string searchTypes;
@@ -86,7 +100,7 @@ namespace bggApi
             }
             return result;
         }
-
+        //Loads xml data from the client
         private XmlNodeList GetItems(string requestString)
         {
             string resultString = client.DownloadString(requestString);

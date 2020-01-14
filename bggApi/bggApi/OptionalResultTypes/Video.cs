@@ -18,7 +18,15 @@ namespace bggApi.OptionalResultTypes
 
         public Video(XmlNode node)
         {
-            //TODO : Set properties
+            //TODO check if not null
+            Id = Convert.ToInt32(node.Attributes["id"].Value);
+            Title = node.Attributes["title"].ToString();
+            Category = node.Attributes["category"].ToString();
+            Language = node.Attributes["language"].ToString();
+            Link = node.Attributes["link"].ToString();
+            Username = node.Attributes["username"].ToString();
+            Userid = Convert.ToInt32(node.Attributes["userid"].Value);
+            Postdate = node.Attributes["postdate"].ToString(); //TODO make it a datetime
         }
     }
 }
