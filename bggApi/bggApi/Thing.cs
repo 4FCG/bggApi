@@ -15,7 +15,7 @@ namespace bggApi
 
         public Statistics Statistics { get; set; }
 
-        //TODO Add page support
+        //TODO Add page support and ratingcomments support
         public List<Comment> Comments { get; } = new List<Comment>();
 
         public Thing(XmlNode node)

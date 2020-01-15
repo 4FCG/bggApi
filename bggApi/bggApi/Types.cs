@@ -4,12 +4,10 @@ using System.Text;
 
 namespace bggApi
 {
-    //Thing types
-
     /// <summary>
     /// The different thingtypes recognized by the BGG API.
     /// </summary>
-    public enum Type
+    public enum ThingType
     {
         none,
         rpgitem,
@@ -17,5 +15,21 @@ namespace bggApi
         boardgame,
         boardgameaccessory,
         boardgameexpansion
+    }
+    /// <summary>
+    /// The different types accepted by the hot function
+    /// </summary>
+    public enum HotType
+    {
+        none,
+        boardgame,
+        rpg,
+        videogame,
+        boardgamecompany,
+        videogamecompany
+        //The following types are listed as options but yield no results:
+        //boardgameperson
+        //rpgperson
+        //rpgcompany
     }
 }

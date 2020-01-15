@@ -37,14 +37,14 @@ namespace bggApi
             string requestString = apiBaseAddress + "thing?id=" + String.Join(',', id) + (versions ? "&versions=1" : "") + (videos ? "&videos=1" : "") + (comments ? "&comments=1" : "");
             return GetThing(requestString);
         }
-        public List<SearchResult> Search(string query, Type type = Type.none, bool exact = false)
+        public List<SearchResult> Search(string query, ThingType type = ThingType.none, bool exact = false)
         {
-            string requestString = apiBaseAddress + "search?query=" + query.Replace(' ', '+') + (type == Type.none ? "" : "&type=" + type.ToString()) + (exact ? "&exact=1" : "");
+            string requestString = apiBaseAddress + "search?query=" + query.Replace(' ', '+') + (type == ThingType.none ? "" : "&type=" + type.ToString()) + (exact ? "&exact=1" : "");
             return GetSearchresults(requestString);
         }
 
         //Overload function for multiple types
-        public List<SearchResult> Search(string query, IEnumerable<Type> type = null, bool exact = false)
+        public List<SearchResult> Search(string query, IEnumerable<ThingType> type = null, bool exact = false)
         {
             string searchTypes;
             if (type == null)
@@ -54,7 +54,7 @@ namespace bggApi
             else
             {
                 searchTypes = "&type=";
-                foreach (Type single in type)
+                foreach (ThingType single in type)
                 {
                     searchTypes += single.ToString() + ",";
                 }
@@ -62,6 +62,22 @@ namespace bggApi
 
             string requestString = apiBaseAddress + "search?query=" + query.Replace(' ', '+') + searchTypes + (exact ? "&exact=1" : "");
             return GetSearchresults(requestString);
+        }
+        /// <summary>
+        /// Gets the top 50 most active items on the site.
+        /// </summary>
+        /// <param name="type">Type of item to sort by.</param>
+        /// <returns></returns>
+        public List<HotItem> Hot(HotType type = HotType.none)
+        {
+            string requeststring = apiBaseAddress + "hot" + (type == HotType.none ? "" : "?type=" + type.ToString());
+            List<HotItem> items = new List<HotItem>();
+            foreach (XmlNode node in GetItems(requeststring))
+            {
+                HotItem item = new HotItem(node);
+                items.Add(item);
+            }
+            return items;
         }
 
         private List<SearchResult> GetSearchresults(string requestString)

@@ -11,29 +11,33 @@ namespace bggApi
         static void Main(string[] args)
         {
             BggApi testApi = new BggApi();
-            List<int> ids = new List<int> { 1, 200, 50 };
-            List<Thing> test = testApi.GetThing(ids, versions:true);
+            //List<int> ids = new List<int> { 1, 200, 50 };
+            //List<Thing> test = testApi.GetThing(ids, versions:true);
             
-            foreach (Thing thing in test)
+            //foreach (Thing thing in test)
+            //{
+            //    Console.WriteLine(thing.Names.Find(name => name.Type == "primary").Value);
+            //}
+
+            //List<ThingType> types = new List<ThingType> { ThingType.boardgame, ThingType.videogame };
+
+            //List<SearchResult> searchTest = testApi.Search("fortnite", type: types);
+
+            //foreach (SearchResult result in searchTest)
+            //{
+            //    Console.WriteLine(result.Name.Value);
+            //    Thing thing = testApi.GetThing(result.Id, comments:true)[0];
+            //    foreach (bggApi.OptionalResultTypes.Comment comment in thing.Comments)
+            //    {
+            //        Console.WriteLine(comment.Username);
+            //        Console.WriteLine(comment.Value);
+            //    }
+            //}
+
+            foreach (HotItem item in testApi.Hot(HotType.videogame))
             {
-                Console.WriteLine(thing.Names.Find(name => name.Type == "primary").Value);
+                Console.WriteLine(item.Rank + ": " + item.Name);
             }
-
-            List<Type> types = new List<Type> { Type.boardgame, Type.videogame };
-
-            List<SearchResult> searchTest = testApi.Search("fortnite", type: types);
-
-            foreach (SearchResult result in searchTest)
-            {
-                Console.WriteLine(result.Name.Value);
-                Thing thing = testApi.GetThing(result.Id, comments:true)[0];
-                foreach (bggApi.OptionalResultTypes.Comment comment in thing.Comments)
-                {
-                    Console.WriteLine(comment.Username);
-                    Console.WriteLine(comment.Value);
-                }
-            }
-
         }
     }
 }
