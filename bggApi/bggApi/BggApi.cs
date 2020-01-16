@@ -80,6 +80,16 @@ namespace bggApi
             return items;
         }
 
+        public User User(string name)
+        {
+            string requestString = apiBaseAddress + "user?name=" + name;
+            string resultString = client.DownloadString(requestString);
+            XmlDocument xmlData = new XmlDocument();
+            xmlData.LoadXml(resultString);
+            XmlNode user = xmlData.SelectSingleNode("user");
+            return new User(user);
+        }
+
         private List<SearchResult> GetSearchresults(string requestString)
         {
             List<SearchResult> searchResults = new List<SearchResult>();

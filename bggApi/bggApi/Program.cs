@@ -13,7 +13,7 @@ namespace bggApi
             BggApi testApi = new BggApi();
             //List<int> ids = new List<int> { 1, 200, 50 };
             //List<Thing> test = testApi.GetThing(ids, versions:true);
-            
+
             //foreach (Thing thing in test)
             //{
             //    Console.WriteLine(thing.Names.Find(name => name.Type == "primary").Value);
@@ -34,10 +34,13 @@ namespace bggApi
             //    }
             //}
 
-            foreach (HotItem item in testApi.Hot(HotType.videogame))
-            {
-                Console.WriteLine(item.Rank + ": " + item.Name);
-            }
+            //foreach (HotItem item in testApi.Hot(HotType.videogame))
+            //{
+            //    Console.WriteLine(item.Rank + ": " + item.Name);
+            //}
+            User user = testApi.User("sheep");
+            Console.WriteLine(user.Name);
+            Console.WriteLine(user.Yearregistered);
         }
     }
 }
