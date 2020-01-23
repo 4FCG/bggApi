@@ -17,7 +17,10 @@ namespace bggApi
 
         public Link(XmlNode node)
         {
-
+            Type = node.Attributes["type"].Value.ToString();
+            Value = node.Attributes["value"].Value.ToString();
+            Id = Convert.ToInt32(node.Attributes["type"].Value);
+            //TODO add inbound
         }
     }
 }
