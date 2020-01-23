@@ -19,7 +19,7 @@ namespace bggApi
         {
             Type = node.Attributes["type"].Value.ToString();
             Value = node.Attributes["value"].Value.ToString();
-            Id = Convert.ToInt32(node.Attributes["type"].Value);
+            Id = Convert.ToInt32(node.Attributes["id"].Value);
             //TODO add inbound
         }
     }
