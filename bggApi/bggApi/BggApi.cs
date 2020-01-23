@@ -34,7 +34,7 @@ namespace bggApi
         //Overload function GetThing, to take multiple id's in a list
         public List<Thing> GetThing(List<int> id, bool versions = false, bool videos = false, bool comments = false)
         {
-            string requestString = apiBaseAddress + "thing?id=" + String.Join(',', id) + (versions ? "&versions=1" : "") + (videos ? "&videos=1" : "") + (comments ? "&comments=1" : "");
+            string requestString = apiBaseAddress + "thing?id=" + String.Join(",", id) + (versions ? "&versions=1" : "") + (videos ? "&videos=1" : "") + (comments ? "&comments=1" : "");
             return GetThing(requestString);
         }
         public List<SearchResult> Search(string query, ThingType type = ThingType.none, bool exact = false)

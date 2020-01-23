@@ -1,8 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net472</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
+    <Authors>4FCG</Authors>
+    <Description>Parser for the boardgamegeek api.</Description>
+    <RepositoryUrl>https://github.com/4FCG/bggApi</RepositoryUrl>
+    <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
+    <Version>1.0.1</Version>
   </PropertyGroup>
-
+  
 </Project>

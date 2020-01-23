@@ -30,8 +30,8 @@ namespace bggApi
                 Id = Convert.ToInt32(node.Attributes["id"].Value);
                 Type = node.Attributes["type"].Value.ToString();
 
-                Names = node.SelectNodes("name").Cast<XmlNode>().Select(node => new Name(node)).ToList();
-                Links = node.SelectNodes("link").Cast<XmlNode>().Select(node => new Link(node)).ToList();
+                Names = node.SelectNodes("name").Cast<XmlNode>().Select(n => new Name(n)).ToList();
+                Links = node.SelectNodes("link").Cast<XmlNode>().Select(n => new Link(n)).ToList();
             }
             catch (NullReferenceException) {
                 throw new Exception("Xml node is of a wrong format or is missing required fields");
@@ -51,7 +51,7 @@ namespace bggApi
             //TODO : Check null properly
             try
             {
-                Polls = node.SelectNodes("poll").Cast<XmlNode>().Select(node => new Poll(node)).ToList();
+                Polls = node.SelectNodes("poll").Cast<XmlNode>().Select(n => new Poll(n)).ToList();
             }
             catch (ArgumentNullException)
             {
