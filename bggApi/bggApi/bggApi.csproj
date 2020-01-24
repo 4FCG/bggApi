@@ -9,7 +9,7 @@
     <Description>Parser for the boardgamegeek api.</Description>
     <RepositoryUrl>https://github.com/4FCG/bggApi</RepositoryUrl>
     <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
-    <Version>1.0.1</Version>
+    <Version>1.0.3</Version>
   </PropertyGroup>
   
 </Project>

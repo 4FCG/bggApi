@@ -24,8 +24,12 @@ namespace bggApi
             try
             {
                 Description = node["description"].InnerText.ToString();
-                Image = node["image"].InnerText.ToString();
-                Thumbnail = node["thumbnail"].InnerText.ToString();
+                
+                if (node["image"] != null)
+                {
+                    Image = node["image"].InnerText.ToString();
+                    Thumbnail = node["thumbnail"].InnerText.ToString();
+                }
 
                 Id = Convert.ToInt32(node.Attributes["id"].Value);
                 Type = node.Attributes["type"].Value.ToString();
