@@ -44,7 +44,7 @@ namespace bggApi
         public int? Issueindex { get; private set; }
 
         //Rpgitem properties
-        public int? Seriescode { get; private set; }
+        public string Seriescode { get; private set; }
 
         //Videogame properties
         public string Releasedate { get; private set; }

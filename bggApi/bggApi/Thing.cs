@@ -73,7 +73,7 @@ namespace bggApi
             //TODO: Is seriescode a string or an int?
             if (node["seriescode"] != null)
             {
-                Seriescode = Convert.ToInt32(node["seriescode"].GetAttribute("value"));
+                Seriescode = node["seriescode"].GetAttribute("value").ToString();
             }
 
             //Videogame properties
